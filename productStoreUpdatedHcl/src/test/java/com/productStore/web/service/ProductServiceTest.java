@@ -35,7 +35,6 @@ public class ProductServiceTest {
 		product.setId(1L);
 		product.setName("prod");
 		products.add(product);
-		System.out.println(products.size());
 	}
 	
 	
@@ -56,6 +55,23 @@ public class ProductServiceTest {
 		Assert.assertEquals("prod", product.getName());
 	}
 
+	@Test
+	public void testFindByNameContainingPositive(){
+		Mockito.when(prodRepository.findByNameContaining("pr")).thenReturn(products);
+		List<Product> restProducts  = prodService.findByNameContaining("pr");
+		Assert.assertNotNull(restProducts);
+		Assert.assertEquals(1, restProducts.size());
+	}
+	
+	@Test
+	public void testFindByNameContainingNegative(){
+		Mockito.when(prodRepository.findByNameContaining("pr")).thenReturn(products);
+		List<Product> restProducts  = prodService.findByNameContaining("op");
+		//Assert.assertNull(restProducts);
+		Assert.assertEquals(0, restProducts.size());
+	}
+	
+	
 	
 //	@Test
 //	public void testFindByIdForNegative(){
