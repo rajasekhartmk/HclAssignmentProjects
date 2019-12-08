@@ -73,13 +73,14 @@ public class CustomerServiceTest {
 		customer2.setId(2L);
 		customer2.setEmail("email");
 		customer2.setName("king");
-		customers.add(customer2);
+		List<Customer> testcusts=customers;
+		testcusts.add(customer2);
 		
 		Mockito.when(custRepository.save(customer2)).thenReturn(customer2);
 		custService.createCustomer(customer2);
 		Assert.assertNotNull(customer2);
 		Assert.assertEquals("king", customer2.getName());
-		Assert.assertEquals(2, customers.size());
+		Assert.assertEquals(2, testcusts.size());
 	}
 	
 //	@Test

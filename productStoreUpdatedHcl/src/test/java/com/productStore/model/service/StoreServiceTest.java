@@ -58,13 +58,13 @@ public class StoreServiceTest {
 //		Assert.assertEquals(1, testStores.size());
 //	}
 	
-//	@Test
-//	public void testFindAllByIdForNegative(){
-//		Mockito.when(storeRepository.findAllById(1L)).thenReturn(stores);
-//		List<Store> testStores = storeService.findAllById(2L);
-//		//Assert.assertNotNull(testStores);
-//		Assert.assertEquals(0, testStores.size());
-//	}
+	@Test
+	public void testFindAllByIdForNegative(){
+		Mockito.when(storeRepository.findAllById(1L)).thenReturn(stores);
+		List<Store> testStores = storeService.findAllById(2L);
+		//Assert.assertNotNull(testStores);
+		Assert.assertEquals(0, testStores.size());
+	}
 	
 	@Test
 	public void testFindAll(){
