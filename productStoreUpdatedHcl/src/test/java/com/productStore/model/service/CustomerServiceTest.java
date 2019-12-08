@@ -68,6 +68,30 @@ public class CustomerServiceTest {
 	}
 	
 	@Test
+	public void testCreateCustomer(){
+		Customer customer2=new Customer();
+		customer2.setId(2L);
+		customer2.setEmail("email");
+		customer2.setName("king");
+		customers.add(customer2);
+		
+		Mockito.when(custRepository.save(customer2)).thenReturn(customer2);
+		custService.createCustomer(customer2);
+		Assert.assertNotNull(customer2);
+		Assert.assertEquals("king", customer2.getName());
+		Assert.assertEquals(2, customers.size());
+	}
+	
+//	@Test
+//	public void testDeleteById(){
+//		Mockito.when(custRepository.findAll()).thenReturn(customers);
+//		Mockito.when(custRepository.deleteById(2L);
+//		List<Customer> testcusts=custService.findAll();
+//		custService.deleteById(2L);
+//		Assert.assertEquals(1, testcusts.size());
+//	}
+	
+	@Test
 	public void testFindAll(){
 		Mockito.when(custRepository.findAll()).thenReturn(customers);
 		List<Customer> testcusts=custService.findAll();
