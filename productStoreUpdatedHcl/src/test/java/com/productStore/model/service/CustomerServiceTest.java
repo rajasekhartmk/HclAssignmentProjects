@@ -1,4 +1,4 @@
-package com.productStore.web.service;
+package com.productStore.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.productStore.model.entities.Customer;
 import com.productStore.model.exceptions.CustomerNotFoundException;
 import com.productStore.model.persistance.CustomerRepositery;
-import com.productStore.model.service.CustomerServiceImpl;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class CustomerServiceTest {

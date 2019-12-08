@@ -1,4 +1,4 @@
-package com.productStore.web.service;
+package com.productStore.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.data.domain.Sort;
 
 import com.productStore.model.entities.Product;
 import com.productStore.model.exceptions.ProductNotFoundException;
@@ -47,12 +46,32 @@ public class ProductServiceTest {
 		Assert.assertEquals("prod", product.getName());
 	}
 	
+//	@Test
+//	public void testFindByIdForNegative(){
+//		Mockito.when(prodRepository.findById(2L)).thenReturn(Optional.of(product));
+//		Product product = prodService.findById(5L);
+//		Assert.assertNull(product);
+//	}
+
+	@Test(expected=ProductNotFoundException.class)
+	public void testFindByIdForExce(){
+		Mockito.when(prodRepository.findById(2L)).thenReturn(Optional.of(product));
+		prodService.findById(5L);
+	}
+	
 	@Test
 	public void testFindByNameForPositive(){
 		Mockito.when(prodRepository.findByName(Mockito.any())).thenReturn(product);
 		Product product = prodService.findByName("prod");
 		Assert.assertNotNull(product);
 		Assert.assertEquals("prod", product.getName());
+	}
+	
+	@Test
+	public void testFindByNameForNegative(){
+		Mockito.when(prodRepository.findByName("prod")).thenReturn(product);
+		Product prod=prodService.findByName("prid");
+		Assert.assertNull(prod);
 	}
 
 	@Test
@@ -70,35 +89,12 @@ public class ProductServiceTest {
 		//Assert.assertNull(restProducts);
 		Assert.assertEquals(0, restProducts.size());
 	}
-	
-	
-	
-//	@Test
-//	public void testFindByIdForNegative(){
-//		Mockito.when(prodRepository.findById(2L)).thenReturn(Optional.of(product));
-//		Product product = prodService.findById(5L);
-//		Assert.assertNull(product);
-//	}
-
-	@Test(expected=ProductNotFoundException.class)
-	public void testFindByIdForExce(){
-		Mockito.when(prodRepository.findById(2L)).thenReturn(Optional.of(product));
-		prodService.findById(5L);
-	}
-	
-	@Test
-	public void testFindByNameForNegative(){
-		Mockito.when(prodRepository.findByName("prod")).thenReturn(product);
-		Product prod=prodService.findByName("prid");
-		Assert.assertNull(prod);
-	}
 		
 	@Test
 	public void testGetAllProducts(){
-		Mockito.when(prodRepository.findAll(Sort.by(Sort.Direction.ASC, "name"))).thenReturn(products);
-		
+		Mockito.when(prodRepository.findAll()).thenReturn(products);
 		List<Product> restProducts = prodService.findAll();
 		Assert.assertNotNull(restProducts);
-		//Assert.assertEquals(1, restProducts.size());
+		Assert.assertEquals(1, restProducts.size());
 	}
 }

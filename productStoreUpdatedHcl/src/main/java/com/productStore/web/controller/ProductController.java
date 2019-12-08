@@ -99,6 +99,22 @@ public class ProductController {
 //		return ResponseEntity.ok().body(req);
 //	}
 	
+//	@PostMapping(path="/products/buy",produces=MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<MessageRequest> placeOrder(@RequestBody PlacingOrderRequest req,Principal principal){
+//		Product product=prodService.findById(req.getProdId());
+//		Store store=storeService.findById(req.getStoreId());
+//		Customer customer=custService.findByEmail(principal.getName());
+//		
+//		
+//		Order order=new Order(product.getName(), product.getCompany(), customer.getName(), product.getPrice(), store.getName());
+//		customer.addOrder(order);
+//		order.setCustomer(customer);
+//		orderService.createOrder(order);
+//		
+//		MessageRequest request=new MessageRequest("order placed successfully please review");
+//		return ResponseEntity.ok().body(request);
+//	}
+	
 	@PostMapping(path="/products/{id}/rating",produces=MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> productRating(Principal principle,@RequestBody RatingRequest req,@PathVariable(name="id")Long id){
 		Product product=prodService.findById(id);
