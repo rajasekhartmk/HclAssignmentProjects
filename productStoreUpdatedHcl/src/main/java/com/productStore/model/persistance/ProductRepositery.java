@@ -15,6 +15,6 @@ public interface ProductRepositery extends JpaRepository<Product, Long> {
 	
 	public Product findByName(String name);
 	
-	public List<Product> priceLimit(double price);
+	//public List<Product> priceLimit(double price);
 	
 }
