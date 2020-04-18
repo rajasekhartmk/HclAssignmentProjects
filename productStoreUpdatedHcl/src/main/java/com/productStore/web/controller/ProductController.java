@@ -51,6 +51,13 @@ public class ProductController {
 	public ResponseEntity<List<Product>> getByNameContaining(@PathVariable(name="name")String name){
 		return new ResponseEntity<List<Product>>(prodService.findByNameContaining(name),HttpStatus.OK);
 	}
+	
+	
+	//limit the price
+	@GetMapping(path="/products/limit/{price}",produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Product>> getByPriceLimit(@PathVariable(name="price")double price){
+		return new ResponseEntity<List<Product>>(prodService.priceLimit(price),HttpStatus.OK);
+	}
 
 	@GetMapping(path="/products/{id}/stores",produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Store>> getStoresOfProduct(@PathVariable(name="id")Long id){

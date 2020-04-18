@@ -14,4 +14,6 @@ public interface ProductService {
 	
 	public Product findByName(String name);
 	public void update(Product product,Long id);
+	
+	public List<Product> priceLimit(double price);
 }

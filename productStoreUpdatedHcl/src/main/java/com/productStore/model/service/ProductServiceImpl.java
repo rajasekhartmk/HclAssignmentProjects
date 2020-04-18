@@ -1,5 +1,6 @@
 package com.productStore.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepositery repo;
+	
+	List<Product> limitPrice = new ArrayList<Product>();
 	
 	@Override
 	public List<Product> findAll() {
@@ -48,6 +51,16 @@ public class ProductServiceImpl implements ProductService {
 	public void update(Product product,Long id) {
 		Product updateProduct=repo.findById(id).orElseThrow(ProductNotFoundException::new);
 		repo.save(updateProduct);
+	}
+
+	@Override
+	public List<Product> priceLimit(double price) {
+		for(Product p:findAll()){
+			if(p.getPrice()<price){
+				limitPrice.add(p);
+			}
+		}
+		return limitPrice;
 	}
 
 }
